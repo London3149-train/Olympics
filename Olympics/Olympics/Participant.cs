@@ -4,7 +4,7 @@ namespace Olympics
     public class Participant
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string? FIO { get; set; }
         public string? Сountry { get; set; }
         public string? KindOfSport { get; set; }
         public DateTime DateOfBirth { get; set; }
