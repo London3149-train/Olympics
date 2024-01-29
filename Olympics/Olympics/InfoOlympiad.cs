@@ -9,7 +9,5 @@ namespace Olympics
         public string? NameOfCountry { get; set; }
         public string? NameCity { get; set; }
         public KindOfSport KindOfSport { get; set; }
-
-
     }
 }

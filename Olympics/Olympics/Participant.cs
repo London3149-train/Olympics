@@ -5,10 +5,8 @@ namespace Olympics
     {
         public int Id { get; set; }
         public string? FIO { get; set; }
-        public string? Сountry { get; set; }
-        public string? KindOfSport { get; set; }
+        public string? ParticipantsCountry { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string PhotoOfAthlete { get; set; }
         public ParticipantsResult Result { get; set; }
     }
 }
