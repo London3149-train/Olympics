@@ -5,22 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Olympics"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        <TextBox x:Name="YearCarryingOut" HorizontalAlignment="Left" Margin="29,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="" Text="Год проведения" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="TypeOlympicsSummerOrWinter" HorizontalAlignment="Left" Margin="29,67,0,0" TextWrapping="Wrap" Text="Сезон олемпиады" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="NameOfCountry" HorizontalAlignment="Left" Margin="29,102,0,0" TextWrapping="Wrap" Text="Название строны" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="NameCity" HorizontalAlignment="Left" Margin="178,33,0,0" TextWrapping="Wrap" Text="Город" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="NameOfSport" HorizontalAlignment="Left" Margin="178,67,0,0" TextWrapping="Wrap" Text="Название спорта" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="FIO" HorizontalAlignment="Left" Margin="178,102,0,0" TextWrapping="Wrap" Text="ФИО Участника" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="ParticipantsCountry" HorizontalAlignment="Left" Margin="327,33,0,0" TextWrapping="Wrap" Text="Страна Участника" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="DateOfBirth" HorizontalAlignment="Left" Margin="327,71,0,0" TextWrapping="Wrap" Text="Дата рождения" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-        <TextBox x:Name="PlaceInStandings" HorizontalAlignment="Left" Margin="327,102,0,0" TextWrapping="Wrap" Text="Занятое место" VerticalAlignment="Top" Width="120" PreviewMouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
+        <TextBox x:Name="YearCarryingOut" HorizontalAlignment="Left" Margin="29,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="" TextAlignment="Center"/>
+        <TextBox x:Name="TypeOlympicsSummerOrWinter" HorizontalAlignment="Left" Margin="29,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="NameOfCountry" HorizontalAlignment="Left" Margin="29,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="NameCity" HorizontalAlignment="Left" Margin="178,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="NameOfSport" HorizontalAlignment="Left" Margin="178,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="FIO" HorizontalAlignment="Left" Margin="178,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="ParticipantsCountry" HorizontalAlignment="Left" Margin="327,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="DateOfBirth" HorizontalAlignment="Left" Margin="327,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="PlaceInStandings" HorizontalAlignment="Left" Margin="327,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
         <DataGrid x:Name="FieldDisplay" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,158,21,10"/>
-        <Button x:Name="Delete" Content="Удалить" HorizontalAlignment="Left" Margin="671,93,0,0" VerticalAlignment="Top" Width="87" Height="29"/>
+        <Button x:Name="Delete" Content="Удалить" HorizontalAlignment="Left" Margin="671,93,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Delete_Click"/>
         <Button x:Name="Add" Content="Добавить" HorizontalAlignment="Left" Margin="515,93,0,0" VerticalAlignment="Top" Width="87" Height="26" Click="Add_Click"/>
         <Button x:Name="Edit" Content="Редактировать" HorizontalAlignment="Left" Margin="671,30,0,0" VerticalAlignment="Top" Width="87" Height="26"/>
         <Button x:Name="AdditionalWindow" Content="Отобразить" HorizontalAlignment="Left" Margin="515,27,0,0" VerticalAlignment="Top" Width="87" Height="29"/>
+        <Label Content="Год проведения" HorizontalAlignment="Left" Margin="40,7,0,0" VerticalAlignment="Top"/>
+        <Label Content="Сезон олемпиады" HorizontalAlignment="Left" Margin="34,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="Название строны" HorizontalAlignment="Left" Margin="36,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Город" HorizontalAlignment="Left" Margin="216,7,0,0" VerticalAlignment="Top"/>
+        <Label Content="Название спорта" HorizontalAlignment="Left" Margin="186,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="ФИО Участника" HorizontalAlignment="Left" Margin="190,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Страна Участника" HorizontalAlignment="Left" Margin="333,9,0,0" VerticalAlignment="Top"/>
+        <Label Content="Дата рождения" HorizontalAlignment="Left" Margin="337,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="Занятое место" HorizontalAlignment="Left" Margin="340,85,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

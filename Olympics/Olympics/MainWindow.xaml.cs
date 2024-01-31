@@ -4,69 +4,43 @@ namespace Olympics
 {
     public partial class MainWindow : Window
     {
-        InfoOlympiad infoOlympiad = new InfoOlympiad();
-        KindOfSport kindOfSport = new KindOfSport();
-        Participant participant = new Participant();
         ParticipantsResult participantsResult = new ParticipantsResult();
+        DB_Info dB_Info = new DB_Info();
         public MainWindow ( )
         {
             InitializeComponent();
-        }
-
-        private void TextBox_MouseLeftButtonDown( object sender, System.Windows.Input.MouseButtonEventArgs e )
-        {
-            if ( YearCarryingOut.Text == "Год проведения" )
-            {
-                YearCarryingOut.Text = "";
-            }
-            else if( TypeOlympicsSummerOrWinter.Text == "Сезон олемпиады")
-            {
-                TypeOlympicsSummerOrWinter.Text = "";
-            }
-            else if ( NameOfCountry.Text == "Название строны" )
-            {
-                NameOfCountry.Text = "";
-            }
-            else if ( NameCity.Text == "Город" )
-            {
-                NameCity.Text = "";
-            }
-            else if ( NameOfSport.Text == "Название спорта" )
-            {
-                NameOfSport.Text = "";
-            }
-            else if ( FIO.Text == "ФИО Участника" )
-            {
-                FIO.Text = "";
-            }
-            else if ( ParticipantsCountry.Text == "Страна Участника" )
-            {
-                ParticipantsCountry.Text = "";
-            }
-            else if ( DateOfBirth.Text == "Дата рождения" )
-            {
-                DateOfBirth.Text = "";
-            }
-            else if ( PlaceInStandings.Text == "Занятое место" )
-            {
-                PlaceInStandings.Text = "";
-            }
         }
 
         private void Add_Click( object sender, RoutedEventArgs e )
         {
             if( CheckFilling() )
             {
-                infoOlympiad.YearCarryingOut = Convert.ToInt32(YearCarryingOut.Text);
-                infoOlympiad.TypeOlympicsSummerOrWinter = TypeOlympicsSummerOrWinter.Text;
-                infoOlympiad.NameOfCountry = NameOfCountry.Text;
-                infoOlympiad.NameCity = NameCity.Text;
-                kindOfSport.NameOfSport = NameOfSport.Text;
-                participant.FIO = FIO.Text;
-                participant.ParticipantsCountry = ParticipantsCountry.Text;
-                participant.DateOfBirth = DateTime.Parse(DateOfBirth.Text);
-                participantsResult.PlaceInStandings = Convert.ToInt32(PlaceInStandings.Text);
-                participantsResult.Medal = participantsResult.GetMedals(Convert.ToInt32(PlaceInStandings.Text));
+                InfoOlympiad infoOlympiad = new InfoOlympiad
+                {
+                    YearCarryingOut = Convert.ToInt32(YearCarryingOut.Text),
+                    TypeOlympicsSummerOrWinter = TypeOlympicsSummerOrWinter.Text,
+                    NameOfCountry = NameOfCountry.Text,
+                    NameCity = NameCity.Text,
+                    KindOfSport = new KindOfSport
+                    {
+                        NameOfSport = NameOfSport.Text,
+                        Participants = new Participant
+                        {
+                            FIO = FIO.Text,
+                            ParticipantsCountry = ParticipantsCountry.Text,
+                            DateOfBirth = DateTime.Parse(DateOfBirth.Text),
+                            Result = new ParticipantsResult
+                            {
+                                Medal = participantsResult.GetMedals(Convert.ToInt32(PlaceInStandings.Text)),
+                                PlaceInStandings = Convert.ToInt32(PlaceInStandings.Text)
+                            }
+                        }
+                    }
+                };
+                dB_Info.InfoOlympiad.Add( infoOlympiad );
+                dB_Info.SaveChanges();
+                MessageBox.Show("Добавлен");
+                Clear();
             }
             else
             {
@@ -74,18 +48,34 @@ namespace Olympics
             }
         }
 
-        // Доработать
+        public void Clear()
+        {
+            YearCarryingOut.Text = string.Empty;
+            TypeOlympicsSummerOrWinter.Text = string.Empty;
+            NameOfCountry.Text = string.Empty;
+            NameCity.Text = string.Empty;
+            NameOfSport.Text = string.Empty;
+            FIO.Text = string.Empty;
+            ParticipantsCountry.Text = string.Empty;
+            DateOfBirth.Text = string.Empty;
+            PlaceInStandings.Text = string.Empty;
+        }
         public bool CheckFilling()
         {
-            if(YearCarryingOut.Text.Length > 0 || TypeOlympicsSummerOrWinter.Text.Length > 0 ||
-               NameOfCountry.Text.Length > 0 || NameCity.Text.Length > 0 ||
-               NameOfSport.Text.Length > 0 || FIO.Text.Length > 0 ||
-               ParticipantsCountry.Text.Length > 0 || DateOfBirth.Text.Length > 0 ||
-               PlaceInStandings.Text.Length > 0 )
+            if(!String.IsNullOrEmpty(YearCarryingOut.Text) && !String.IsNullOrEmpty(TypeOlympicsSummerOrWinter.Text) &&
+               !String.IsNullOrEmpty(NameOfCountry.Text) && !String.IsNullOrEmpty(NameCity.Text) &&
+               !String.IsNullOrEmpty(NameOfSport.Text) && !String.IsNullOrEmpty(FIO.Text) &&
+               !String.IsNullOrEmpty(ParticipantsCountry.Text) && !String.IsNullOrEmpty(DateOfBirth.Text) &&
+               !String.IsNullOrEmpty(PlaceInStandings.Text) )
             { 
                 return true;
             }
             return false;
+        }
+
+        private void Delete_Click( object sender, RoutedEventArgs e )
+        {
+
         }
     }
 }
