@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Olympics
 {
@@ -6,6 +9,7 @@ namespace Olympics
     {
         ParticipantsResult participantsResult = new ParticipantsResult();
         DB_Info dB_Info = new DB_Info();
+        List<InfoOlympiad> _olympias;
         public MainWindow ( )
         {
             InitializeComponent();
@@ -75,6 +79,9 @@ namespace Olympics
 
         private void Delete_Click( object sender, RoutedEventArgs e )
         {
+            var _olympias = dB_Info.InfoOlympiad.Include(c => c.KindOfSport.Participants.Result).ToList();
+            
+            FieldDisplay.ItemsSource = _olympias;
 
         }
     }
