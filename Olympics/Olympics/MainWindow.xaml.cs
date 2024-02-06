@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Olympics.Classes_for_outputting_data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace Olympics
 {
     public partial class MainWindow : Window
     {
         ParticipantsResult participantsResult = new ParticipantsResult();
+        GeneralTableData generalTableData = new GeneralTableData();
         DB_Info dB_Info = new DB_Info();
-        List<InfoOlympiad> _olympias;
+        List<InfoOlympiad> _olympias = new List<InfoOlympiad>();
         public MainWindow ( )
         {
             InitializeComponent();
@@ -77,12 +77,50 @@ namespace Olympics
             return false;
         }
 
+        private void Search_Click ( object sender, RoutedEventArgs e )
+        {
+            var _olympias = dB_Info.InfoOlympiad.Include( c => c.KindOfSport.Participants.Result ).Where(c => EF.Functions.Like( c.KindOfSport.Participants.FIO, $"%{FIO.Text}%")).ToList();
+            FieldDisplay.ItemsSource = GetGeneralTableData( _olympias );
+            FIO.Text = string.Empty;
+        }
+
         private void Delete_Click( object sender, RoutedEventArgs e )
         {
-            var _olympias = dB_Info.InfoOlympiad.Include(c => c.KindOfSport.Participants.Result).ToList();
-            
-            FieldDisplay.ItemsSource = _olympias;
+
+            foreach (var item in FieldDisplay.ItemsSource)
+            {
+                var s = item;
+            }
 
         }
+
+        private List<GeneralTableData> GetGeneralTableData( List<InfoOlympiad> _olympias)
+        {
+            List < GeneralTableData > generalTableData1 = new List < GeneralTableData >();
+
+            foreach (var item in _olympias)
+            {
+                GeneralTableData generalTableData = new GeneralTableData();
+                generalTableData.IsCheks = false;
+                generalTableData.ID = item.ID;
+                generalTableData.YearCarryingOut = item.YearCarryingOut;
+                generalTableData.TypeOlympicsSummerOrWinter = item.TypeOlympicsSummerOrWinter;
+                generalTableData.NameOfCountry = item.NameOfCountry;
+                generalTableData.NameCity = item.NameCity;
+                generalTableData.KindOfSportID = item.KindOfSport.ID;
+                generalTableData.NameOfSport = item.KindOfSport.NameOfSport;
+                generalTableData.ParticipantId = item.KindOfSport.Participants.Id;
+                generalTableData.FIO = item.KindOfSport.Participants.FIO;
+                generalTableData.ParticipantsCountry = item.KindOfSport.Participants.ParticipantsCountry;
+                generalTableData.DateOfBirth = item.KindOfSport.Participants.DateOfBirth;
+                generalTableData.ParticipantsResultID = item.KindOfSport.Participants.Result.ID;
+                generalTableData.PlaceInStandings = item.KindOfSport.Participants.Result.PlaceInStandings;
+                generalTableData.Medal = item.KindOfSport.Participants.Result.Medal;
+                generalTableData1.Add(generalTableData);
+            }
+
+            return generalTableData1;
+        }
+        
     }
 }
