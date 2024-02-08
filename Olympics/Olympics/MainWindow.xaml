@@ -1,0 +1,36 @@
+﻿<Window x:Class="Olympics.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox x:Name="YearCarryingOut" HorizontalAlignment="Left" Margin="29,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="TypeOlympicsSummerOrWinter" HorizontalAlignment="Left" Margin="29,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="NameOfCountry" HorizontalAlignment="Left" Margin="29,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="NameCity" HorizontalAlignment="Left" Margin="178,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="NameOfSport" HorizontalAlignment="Left" Margin="178,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="FIO" HorizontalAlignment="Left" Margin="178,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="ParticipantsCountry" HorizontalAlignment="Left" Margin="327,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="DateOfBirth" HorizontalAlignment="Left" Margin="327,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBox x:Name="PlaceInStandings" HorizontalAlignment="Left" Margin="327,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <DataGrid x:Name="FieldDisplay" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,158,21,10"/>
+        <Button x:Name="Delete" Content="Удалить" HorizontalAlignment="Left" Margin="728,87,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Delete_Click"/>
+        <Button x:Name="Add" Content="Добавить" HorizontalAlignment="Left" Margin="590,87,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Add_Click"/>
+        <Button x:Name="Edit" Content="Редактировать" HorizontalAlignment="Left" Margin="728,30,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Edit_Click"/>
+        <Button x:Name="AdditionalWindow" Content="Отобразить" HorizontalAlignment="Left" Margin="590,31,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="AdditionalWindow_Click"/>
+        <Button x:Name="Search" Content="Поиск" HorizontalAlignment="Left" Margin="474,62,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Search_Click"/>
+        <Label Content="Год проведения" HorizontalAlignment="Left" Margin="40,7,0,0" VerticalAlignment="Top"/>
+        <Label Content="Сезон олемпиады" HorizontalAlignment="Left" Margin="34,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="Название строны" HorizontalAlignment="Left" Margin="36,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Город" HorizontalAlignment="Left" Margin="216,7,0,0" VerticalAlignment="Top"/>
+        <Label Content="Название спорта" HorizontalAlignment="Left" Margin="186,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="ФИО Участника" HorizontalAlignment="Left" Margin="190,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Страна Участника" HorizontalAlignment="Left" Margin="333,9,0,0" VerticalAlignment="Top"/>
+        <Label Content="Дата рождения" HorizontalAlignment="Left" Margin="337,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="Занятое место" HorizontalAlignment="Left" Margin="340,85,0,0" VerticalAlignment="Top"/>
+        
+
+    </Grid>
+</Window>
