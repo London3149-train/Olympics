@@ -15,6 +15,7 @@ namespace Olympics
         public int PlaceInStandings { get; set; }
         public Medals Medal { get; set; }
 
+
         public Medals GetMedals(int medal)
         {
             if( medal == 1)

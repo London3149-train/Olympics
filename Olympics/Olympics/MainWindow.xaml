@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Olympics"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000" ResizeMode="NoResize">
+        Title="MainWindow" Height="450" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBox x:Name="YearCarryingOut" HorizontalAlignment="Left" Margin="29,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="" TextAlignment="Center"/>
+        <TextBox x:Name="YearCarryingOut" HorizontalAlignment="Left" Margin="29,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
         <TextBox x:Name="TypeOlympicsSummerOrWinter" HorizontalAlignment="Left" Margin="29,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
         <TextBox x:Name="NameOfCountry" HorizontalAlignment="Left" Margin="29,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
         <TextBox x:Name="NameCity" HorizontalAlignment="Left" Margin="178,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
@@ -19,8 +18,8 @@
         <DataGrid x:Name="FieldDisplay" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,158,21,10"/>
         <Button x:Name="Delete" Content="Удалить" HorizontalAlignment="Left" Margin="728,87,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Delete_Click"/>
         <Button x:Name="Add" Content="Добавить" HorizontalAlignment="Left" Margin="590,87,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Add_Click"/>
-        <Button x:Name="Edit" Content="Редактировать" HorizontalAlignment="Left" Margin="728,30,0,0" VerticalAlignment="Top" Width="87" Height="29"/>
-        <Button x:Name="AdditionalWindow" Content="Отобразить" HorizontalAlignment="Left" Margin="590,31,0,0" VerticalAlignment="Top" Width="87" Height="29"/>
+        <Button x:Name="Edit" Content="Редактировать" HorizontalAlignment="Left" Margin="728,30,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Edit_Click"/>
+        <Button x:Name="AdditionalWindow" Content="Отобразить" HorizontalAlignment="Left" Margin="590,31,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="AdditionalWindow_Click"/>
         <Button x:Name="Search" Content="Поиск" HorizontalAlignment="Left" Margin="474,62,0,0" VerticalAlignment="Top" Width="87" Height="29" Click="Search_Click"/>
         <Label Content="Год проведения" HorizontalAlignment="Left" Margin="40,7,0,0" VerticalAlignment="Top"/>
         <Label Content="Сезон олемпиады" HorizontalAlignment="Left" Margin="34,49,0,0" VerticalAlignment="Top"/>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="Olympics.QueryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="QueryWindow" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <CheckBox x:Name="Request1" Content="Запрос 1 " HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request1_Checked"/>
+        <CheckBox x:Name="Request2" Content="Запрос 2 " HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request2_Checked"/>
+        <CheckBox x:Name="Request3" Content="Запрос 3 " HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request3_Checked"/>
+        <CheckBox x:Name="Request4" Content="Запрос 4 " HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request4_Checked"/>
+        <CheckBox x:Name="Request5" Content="Запрос 5 " HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request5_Checked"/>
+        <CheckBox x:Name="Request6" Content="Запрос 6 " HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request6_Checked"/>
+        <CheckBox x:Name="Request7" Content="Запрос 7 " HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" FontSize="14" Checked="Request7_Checked"/>
+        <Label Content="Медальный зачет по странам и конкретной олнмпиаде, за всю историю игр" HorizontalAlignment="Left" Margin="91,14,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Медалистов по разным видам спорта и конкретной олнмпиаде, за всю историю игр" HorizontalAlignment="Left" Margin="91,54,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Страну, которая собрала больше всего золотых медалей на конкретной олнмпиаде, за всю историю игр" HorizontalAlignment="Left" Margin="91,94,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Спортсмена, который выиграл больше всего золотых медалей в конкретном виде спорта" HorizontalAlignment="Left" Margin="91,134,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Название страны, которая чаще всеч была победителем олемпиад" HorizontalAlignment="Left" Margin="91,174,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Список участников конкретной страны" HorizontalAlignment="Left" Margin="91,214,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Статистику выступлений конкретной страны на конкретной олимпиаде за всю историю игр" HorizontalAlignment="Left" Margin="91,254,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="Show" Content="Показать" HorizontalAlignment="Left" Margin="506,358,0,0" VerticalAlignment="Top" Width="116" Height="44" Click="Show_Click"/>
+        <Button x:Name="Back" Content="Назад" HorizontalAlignment="Left" Margin="660,358,0,0" VerticalAlignment="Top" Width="116" Height="44" Click="Back_Click"/>
+    </Grid>
+</Window>

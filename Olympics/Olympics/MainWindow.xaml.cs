@@ -7,21 +7,21 @@ namespace Olympics
     public partial class MainWindow : Window
     {
         ParticipantsResult participantsResult = new ParticipantsResult();
-        GeneralTableData generalTableData = new GeneralTableData();
         DB_Info dB_Info = new DB_Info();
-        List<InfoOlympiad> _olympias = new List<InfoOlympiad>();
+
         public MainWindow ( )
         {
             InitializeComponent();
+            this.GetValeDB();
         }
 
-        private void Add_Click( object sender, RoutedEventArgs e )
+        private void Add_Click ( object sender, RoutedEventArgs e )
         {
             if( CheckFilling() )
             {
                 InfoOlympiad infoOlympiad = new InfoOlympiad
                 {
-                    YearCarryingOut = Convert.ToInt32(YearCarryingOut.Text),
+                    YearCarryingOut = Convert.ToInt32( YearCarryingOut.Text ),
                     TypeOlympicsSummerOrWinter = TypeOlympicsSummerOrWinter.Text,
                     NameOfCountry = NameOfCountry.Text,
                     NameCity = NameCity.Text,
@@ -32,27 +32,28 @@ namespace Olympics
                         {
                             FIO = FIO.Text,
                             ParticipantsCountry = ParticipantsCountry.Text,
-                            DateOfBirth = DateTime.Parse(DateOfBirth.Text),
+                            DateOfBirth = DateTime.Parse( DateOfBirth.Text ),
                             Result = new ParticipantsResult
                             {
-                                Medal = participantsResult.GetMedals(Convert.ToInt32(PlaceInStandings.Text)),
-                                PlaceInStandings = Convert.ToInt32(PlaceInStandings.Text)
+                                Medal = participantsResult.GetMedals( Convert.ToInt32( PlaceInStandings.Text ) ),
+                                PlaceInStandings = Convert.ToInt32( PlaceInStandings.Text )
                             }
                         }
                     }
                 };
                 dB_Info.InfoOlympiad.Add( infoOlympiad );
                 dB_Info.SaveChanges();
-                MessageBox.Show("Добавлен");
-                Clear();
+                MessageBox.Show( "Добавлен" );
+                this.GetValeDB();
+                this.Clear();
             }
             else
             {
-                MessageBox.Show("Не все данные заполнены");
+                MessageBox.Show( "Не все данные заполнены" );
             }
         }
 
-        public void Clear()
+        public void Clear ( )
         {
             YearCarryingOut.Text = string.Empty;
             TypeOlympicsSummerOrWinter.Text = string.Empty;
@@ -64,14 +65,15 @@ namespace Olympics
             DateOfBirth.Text = string.Empty;
             PlaceInStandings.Text = string.Empty;
         }
-        public bool CheckFilling()
+
+        public bool CheckFilling ( )
         {
-            if(!String.IsNullOrEmpty(YearCarryingOut.Text) && !String.IsNullOrEmpty(TypeOlympicsSummerOrWinter.Text) &&
-               !String.IsNullOrEmpty(NameOfCountry.Text) && !String.IsNullOrEmpty(NameCity.Text) &&
-               !String.IsNullOrEmpty(NameOfSport.Text) && !String.IsNullOrEmpty(FIO.Text) &&
-               !String.IsNullOrEmpty(ParticipantsCountry.Text) && !String.IsNullOrEmpty(DateOfBirth.Text) &&
-               !String.IsNullOrEmpty(PlaceInStandings.Text) )
-            { 
+            if( !String.IsNullOrEmpty( YearCarryingOut.Text ) && !String.IsNullOrEmpty( TypeOlympicsSummerOrWinter.Text ) &&
+               !String.IsNullOrEmpty( NameOfCountry.Text ) && !String.IsNullOrEmpty( NameCity.Text ) &&
+               !String.IsNullOrEmpty( NameOfSport.Text ) && !String.IsNullOrEmpty( FIO.Text ) &&
+               !String.IsNullOrEmpty( ParticipantsCountry.Text ) && !String.IsNullOrEmpty( DateOfBirth.Text ) &&
+               !String.IsNullOrEmpty( PlaceInStandings.Text ) )
+            {
                 return true;
             }
             return false;
@@ -79,26 +81,46 @@ namespace Olympics
 
         private void Search_Click ( object sender, RoutedEventArgs e )
         {
-            var _olympias = dB_Info.InfoOlympiad.Include( c => c.KindOfSport.Participants.Result ).Where(c => EF.Functions.Like( c.KindOfSport.Participants.FIO, $"%{FIO.Text}%")).ToList();
-            FieldDisplay.ItemsSource = GetGeneralTableData( _olympias );
-            FIO.Text = string.Empty;
+            this.GetValeDB();
+            this.Clear();
         }
 
-        private void Delete_Click( object sender, RoutedEventArgs e )
+        private void GetValeDB ( )
+        {
+            var _olympics = dB_Info.InfoOlympiad.Include( c => c.KindOfSport.Participants.Result ).Where( c => c.KindOfSport.Participants.FIO.Contains(FIO.Text) ).ToList();
+            FieldDisplay.ItemsSource = GetGeneralTableData( _olympics );
+        }
+
+        private void Delete_Click ( object sender, RoutedEventArgs e )
         {
 
-            foreach (var item in FieldDisplay.ItemsSource)
+            foreach( GeneralTableData item in FieldDisplay.ItemsSource )
             {
-                var s = item;
-            }
+                if( item.IsCheks == true )
+                {
+                    InfoOlympiad infoOlympiad = dB_Info.InfoOlympiad.Where( c => c.ID == item.ID ).FirstOrDefault();
+                    KindOfSport kindOfSport = dB_Info.KindOfSport.Where( c => c.ID == item.KindOfSportID ).FirstOrDefault();
+                    Participant participant = dB_Info.Participant.Where( c => c.Id == item.ParticipantId ).FirstOrDefault();
+                    ParticipantsResult participantsResult = dB_Info.ParticipantsResult.Where( c => c.ID == item.ParticipantsResultID ).FirstOrDefault();
 
+                    dB_Info.ParticipantsResult.Remove( participantsResult );
+                    dB_Info.Participant.Remove( participant );
+                    dB_Info.KindOfSport.Remove( kindOfSport );
+                    dB_Info.InfoOlympiad.Remove( infoOlympiad );
+
+                    dB_Info.SaveChanges();
+                }
+
+            }
+            MessageBox.Show( "Выбранные данные удалены" );
+            this.GetValeDB();
         }
 
-        private List<GeneralTableData> GetGeneralTableData( List<InfoOlympiad> _olympias)
+        private List<GeneralTableData> GetGeneralTableData ( List<InfoOlympiad> _olympics )
         {
-            List < GeneralTableData > generalTableData1 = new List < GeneralTableData >();
+            List<GeneralTableData> generalTableData1 = new List<GeneralTableData>();
 
-            foreach (var item in _olympias)
+            foreach( var item in _olympics )
             {
                 GeneralTableData generalTableData = new GeneralTableData();
                 generalTableData.IsCheks = false;
@@ -116,11 +138,92 @@ namespace Olympics
                 generalTableData.ParticipantsResultID = item.KindOfSport.Participants.Result.ID;
                 generalTableData.PlaceInStandings = item.KindOfSport.Participants.Result.PlaceInStandings;
                 generalTableData.Medal = item.KindOfSport.Participants.Result.Medal;
-                generalTableData1.Add(generalTableData);
+                generalTableData1.Add( generalTableData );
             }
 
             return generalTableData1;
         }
-        
+
+        private void Edit_Click ( object sender, RoutedEventArgs e )
+        {
+            foreach( GeneralTableData item in FieldDisplay.ItemsSource )
+            {
+                if( item.IsCheks == true )
+                {
+                    this.SetEditDB( item );
+                }
+            }
+            MessageBox.Show( "Выбранное данные Изменены" );
+            this.GetValeDB();
+            this.Clear();
+        }
+
+        private void SetEditDB( GeneralTableData item )
+        {
+            if ( item != null ) 
+            {
+                if (!String.IsNullOrEmpty( YearCarryingOut.Text ) )
+                {
+                    var g = dB_Info.InfoOlympiad.Where( c => c.ID == item.ID ).FirstOrDefault();
+                    g.YearCarryingOut = Convert.ToInt32( YearCarryingOut.Text );
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( TypeOlympicsSummerOrWinter.Text) )
+                {
+                    var g = dB_Info.InfoOlympiad.Where( c => c.ID == item.ID ).FirstOrDefault();
+                    g.TypeOlympicsSummerOrWinter = TypeOlympicsSummerOrWinter.Text ;
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( NameOfCountry.Text ) )
+                {
+                    var g = dB_Info.InfoOlympiad.Where( c => c.ID == item.ID ).FirstOrDefault();
+                    g.NameOfCountry = NameOfCountry.Text;
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( NameCity.Text ) )
+                {
+                    var g = dB_Info.InfoOlympiad.Where( c => c.ID == item.ID ).FirstOrDefault();
+                    g.NameCity = NameCity.Text;
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( NameOfSport.Text ) )
+                {
+                    var g = dB_Info.KindOfSport.Where( c => c.ID == item.KindOfSportID ).FirstOrDefault();
+                    g.NameOfSport = NameOfSport.Text;
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( FIO.Text ) )
+                {
+                    var g = dB_Info.Participant.Where( c => c.Id == item.ParticipantId ).FirstOrDefault();
+                    g.FIO = FIO.Text;
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( ParticipantsCountry.Text ) )
+                {
+                    var g = dB_Info.Participant.Where( c => c.Id == item.ParticipantId ).FirstOrDefault();
+                    g.ParticipantsCountry = ParticipantsCountry.Text;
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( DateOfBirth.Text ) )
+                {
+                    var g = dB_Info.Participant.Where( c => c.Id == item.ParticipantId ).FirstOrDefault();
+                    g.DateOfBirth = DateTime.Parse( DateOfBirth.Text );
+                    dB_Info.SaveChanges();
+                }
+                if( !String.IsNullOrEmpty( PlaceInStandings.Text ) )
+                {
+                    var g = dB_Info.ParticipantsResult.Where( c => c.ID == item.ParticipantsResultID ).FirstOrDefault();
+                    g.PlaceInStandings = Convert.ToInt32( PlaceInStandings.Text );
+                    g.Medal = participantsResult.GetMedals( Convert.ToInt32( PlaceInStandings.Text ) );
+                    dB_Info.SaveChanges();
+                }
+            }
+        }
+
+        private void AdditionalWindow_Click ( object sender, RoutedEventArgs e )
+        {
+            QueryWindow queryWindow = new QueryWindow(this);
+            queryWindow.ShowDialog();
+        }
     }
 }
